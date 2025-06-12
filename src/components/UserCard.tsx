@@ -52,20 +52,20 @@ export function UserCard({ user }: UserCardProps) {
     }, [user.uuid, fetchUsers]);
 
     return (
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
-            <div className="relative h-48 w-full">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg w-56">
+            <div className="relative h-40 w-full">
                 <Image
                     ref={imgRef}
                     src={user.picture.largeData || user.picture.large}
                     alt={`${user.name.first} ${user.name.last}`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     priority={false}
                     loading="lazy"
                 />
             </div>
-            <div className="p-4">
+            <div className="p-3">
                 <div className="flex justify-between items-start">
                     <div>
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">

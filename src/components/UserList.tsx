@@ -50,7 +50,7 @@ export function UserList() {
     }
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-4xl mx-auto px-4">
             <div className="flex justify-between items-center mb-4 gap-2">
                 {!isOnline && <OfflineBanner />}
                 {isOnline && (
@@ -82,7 +82,7 @@ export function UserList() {
                 )}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 justify-items-center">
                 {displayUsers.map((user) => (
                     <UserCard key={user.uuid} user={user} />
                 ))}
