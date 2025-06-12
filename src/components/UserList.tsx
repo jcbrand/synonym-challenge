@@ -57,8 +57,8 @@ export function UserList() {
                     <button
                         onClick={() => useUserStore.getState().toggleManualOffline()}
                         className={`px-4 py-2 rounded ${
-                            useUserStore.getState().isManualOffline 
-                                ? 'bg-green-500 hover:bg-green-600' 
+                            useUserStore.getState().isManualOffline
+                                ? 'bg-green-500 hover:bg-green-600'
                                 : 'bg-yellow-500 hover:bg-yellow-600'
                         } text-white`}
                     >
