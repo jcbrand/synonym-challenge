@@ -39,21 +39,6 @@ export const useUserStore = create<UserState>((set, get) => ({
             // If we have cached data for this page, use it
             if (cachedUsers.length === get().pageSize) {
                 set({ users: cachedUsers, page });
-                // Still fetch from API in background if online to refresh data
-                if (get().isOnline) {
-                    try {
-                        const response = await fetch(`https://randomuser.me/api/?page=${page}&results=${get().pageSize}`);
-                        const data = await response.json();
-                        const users = data.results.map((user: any) => ({
-                            ...user,
-                            uuid: user.login.uuid,
-                            isFavorite: false,
-                        }));
-                        await db.users.bulkPut(users);
-                    } catch (err) {
-                        console.error('Background refresh failed:', err);
-                    }
-                }
                 return;
             }
 
