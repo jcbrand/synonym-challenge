@@ -9,7 +9,6 @@ interface UserState {
     isOnline: boolean;
     page: number;
     pageSize: number;
-    totalUsers: number;
     searchQuery: string;
     fetchUsers: (page?: number) => Promise<void>;
     toggleFavorite: (uuid: string) => void;
@@ -26,7 +25,6 @@ export const useUserStore = create<UserState>((set, get) => ({
     isOnline: true,
     page: 1,
     pageSize: 10,
-    totalUsers: 0,
     searchQuery: '',
 
     fetchUsers: async (page = 1) => {
@@ -69,7 +67,7 @@ export const useUserStore = create<UserState>((set, get) => ({
                     isFavorite: false,
                 }));
                 await db.users.bulkPut(users);
-                set({ users, page, totalUsers: 100 }); // Assuming 100 total users for pagination
+                set({ users, page });
             } else {
                 // Use whatever partial cached data we have
                 if (cachedUsers.length > 0) {
