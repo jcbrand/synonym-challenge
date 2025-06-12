@@ -75,25 +75,27 @@ export function UserList() {
                 ))}
             </div>
 
-            <div className="flex justify-between items-center mt-6">
-                <button
-                    onClick={() => fetchUsers(page - 1)}
-                    disabled={page === 1 || loading}
-                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
-                >
-                    Previous
-                </button>
-                <span className="text-gray-600 dark:text-gray-300">
-                    Page {page} of {Math.ceil(totalUsers / pageSize)}
-                </span>
-                <button
-                    onClick={() => fetchUsers(page + 1)}
-                    disabled={page * pageSize >= totalUsers || loading}
-                    className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
-                >
-                    Next
-                </button>
-            </div>
+            {!searchQuery && (
+                <div className="flex justify-between items-center mt-6">
+                    <button
+                        onClick={() => fetchUsers(page - 1)}
+                        disabled={page === 1 || loading}
+                        className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+                    >
+                        Previous
+                    </button>
+                    <span className="text-gray-600 dark:text-gray-300">
+                        Page {page} of {Math.ceil(totalUsers / pageSize)}
+                    </span>
+                    <button
+                        onClick={() => fetchUsers(page + 1)}
+                        disabled={page * pageSize >= totalUsers || loading}
+                        className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded disabled:opacity-50"
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
