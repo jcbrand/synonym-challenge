@@ -6,7 +6,23 @@ import { ErrorFallback } from './ErrorFallback';
 import { OfflineBanner } from './OfflineBanner';
 
 export function UserList() {
-    const { users, loading, error, isOnline, page, pageSize, totalUsers, fetchUsers, setOnlineStatus } = useUserStore();
+    const {
+        users,
+        filteredUsers,
+        loading,
+        error,
+        isOnline,
+        page,
+        pageSize,
+        totalUsers,
+        searchQuery,
+        fetchUsers,
+        setOnlineStatus,
+        setSearchQuery,
+        clearSearch,
+    } = useUserStore();
+
+    const displayUsers = searchQuery ? filteredUsers : users;
 
     useEffect(() => {
         // Set up online/offline listeners
@@ -38,8 +54,23 @@ export function UserList() {
         <div className="space-y-4">
             {!isOnline && <OfflineBanner />}
 
+            <div className="mb-4 flex gap-2">
+                <input
+                    type="text"
+                    placeholder="Search by name, email or nationality..."
+                    className="flex-1 p-2 border rounded dark:bg-gray-800 dark:border-gray-700"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                    <button onClick={clearSearch} className="px-4 py-2 bg-gray-200 dark:bg-gray-700 rounded">
+                        Clear
+                    </button>
+                )}
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {users.map((user) => (
+                {displayUsers.map((user) => (
                     <UserCard key={user.uuid} user={user} />
                 ))}
             </div>

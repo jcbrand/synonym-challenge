@@ -3,25 +3,31 @@ import { User, db } from '../lib/db';
 
 interface UserState {
     users: User[];
+    filteredUsers: User[];
     loading: boolean;
     error: string | null;
     isOnline: boolean;
     page: number;
     pageSize: number;
     totalUsers: number;
+    searchQuery: string;
     fetchUsers: (page?: number) => Promise<void>;
     toggleFavorite: (uuid: string) => void;
     setOnlineStatus: (status: boolean) => void;
+    setSearchQuery: (query: string) => void;
+    clearSearch: () => void;
 }
 
 export const useUserStore = create<UserState>((set, get) => ({
     users: [],
+    filteredUsers: [],
     loading: false,
     error: null,
     isOnline: true,
     page: 1,
     pageSize: 10,
     totalUsers: 0,
+    searchQuery: '',
 
     fetchUsers: async (page = 1) => {
         set({ loading: true, error: null });
@@ -71,4 +77,27 @@ export const useUserStore = create<UserState>((set, get) => ({
     },
 
     setOnlineStatus: (status: boolean) => set({ isOnline: status }),
+    setSearchQuery: (query: string) => {
+        set((state) => {
+            const filtered = query
+                ? state.users.filter(
+                      (user) =>
+                          `${user.name.first} ${user.name.last}`.toLowerCase().includes(query.toLowerCase()) ||
+                          user.email.toLowerCase().includes(query.toLowerCase()) ||
+                          user.nat.toLowerCase().includes(query.toLowerCase())
+                  )
+                : state.users;
+            return {
+                searchQuery: query,
+                filteredUsers: filtered,
+                page: 1, // Reset to first page when searching
+            };
+        });
+    },
+    clearSearch: () =>
+        set({
+            searchQuery: '',
+            filteredUsers: [],
+            page: 1,
+        }),
 }));
