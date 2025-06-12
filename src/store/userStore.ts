@@ -54,7 +54,7 @@ export const useUserStore = create<UserState>((set, get) => ({
                             isFavorite: false,
                             picture: {
                                 ...user.picture,
-                                largeData: await fetchImageAsBase64(user.picture.large),
+                                largeData: undefined,
                             },
                         };
                     })

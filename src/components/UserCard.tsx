@@ -1,6 +1,8 @@
 import { User } from '../lib/db';
 import { useUserStore } from '../store/userStore';
 import Image from 'next/image';
+import { useEffect, useRef } from 'react';
+import { db } from '../lib/db';
 
 interface UserCardProps {
     user: User;
@@ -8,17 +10,59 @@ interface UserCardProps {
 
 export function UserCard({ user }: UserCardProps) {
     const toggleFavorite = useUserStore((state) => state.toggleFavorite);
+    const imgRef = useRef<HTMLImageElement>(null);
+    const { fetchUsers } = useUserStore();
+
+    useEffect(() => {
+        const img = imgRef.current;
+        if (!img || user.picture.largeData) return;
+
+        const cacheImage = async () => {
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+
+                const ctx = canvas.getContext('2d');
+                if (!ctx) return;
+
+                ctx.drawImage(img, 0, 0);
+                const base64Data = canvas.toDataURL('image/webp', 0.8);
+                await db.users.update(user.uuid, {
+                    picture: {
+                        ...user.picture,
+                        largeData: base64Data,
+                    },
+                });
+            } catch (err) {
+                console.warn('Image caching failed:', err);
+            }
+        };
+
+        const handleLoad = () => {
+            if (img.complete && img.naturalWidth > 0) {
+                cacheImage();
+            }
+        };
+
+        img.addEventListener('load', handleLoad);
+        return () => {
+            img.removeEventListener('load', handleLoad);
+        };
+    }, [user.uuid, fetchUsers]);
 
     return (
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
             <div className="relative h-48 w-full">
                 <Image
+                    ref={imgRef}
                     src={user.picture.largeData || user.picture.large}
                     alt={`${user.name.first} ${user.name.last}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    unoptimized={!!user.picture.largeData} // Disable optimization for Base64 images
+                    priority={false}
+                    loading="lazy"
                 />
             </div>
             <div className="p-4">
