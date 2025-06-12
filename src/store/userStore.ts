@@ -45,8 +45,8 @@ export const useUserStore = create<UserState>((set, get) => ({
                 return;
             }
 
-            // Otherwise fetch from API if online
-            if (get().isOnline) {
+            // Otherwise fetch from API if online and not manually offline
+            if (get().isOnline && !get().isManualOffline) {
                 const response = await fetch(`https://randomuser.me/api/?page=${page}&results=${get().pageSize}`);
                 const data = await response.json();
                 const users = await Promise.all(
