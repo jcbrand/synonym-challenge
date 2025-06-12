@@ -13,11 +13,12 @@ export function UserCard({ user }: UserCardProps) {
         <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden transition-all hover:shadow-lg">
             <div className="relative h-48 w-full">
                 <Image
-                    src={user.picture.large}
+                    src={user.picture.largeData || user.picture.large}
                     alt={`${user.name.first} ${user.name.last}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    unoptimized={!!user.picture.largeData} // Disable optimization for Base64 images
                 />
             </div>
             <div className="p-4">
