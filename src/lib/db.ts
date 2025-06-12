@@ -1,6 +1,6 @@
 import Dexie from 'dexie';
 
-interface User {
+export interface User {
     uuid: string;
     gender: string;
     name: {
