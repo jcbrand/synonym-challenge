@@ -32,7 +32,23 @@ export const useUserStore = create<UserState>((set, get) => ({
     fetchUsers: async (page = 1) => {
         set({ loading: true, error: null });
         try {
-            // Try to fetch from API first if online
+            // Check if we're paging backwards (should have cached data)
+            const isPreviousPage = page < get().page;
+            
+            // Try to load from IndexedDB first if paging backwards or offline
+            if (isPreviousPage || !get().isOnline) {
+                const users = await db.users
+                    .offset((page - 1) * get().pageSize)
+                    .limit(get().pageSize)
+                    .toArray();
+                
+                if (users.length) {
+                    set({ users, page });
+                    return;
+                }
+            }
+
+            // Otherwise fetch from API if online
             if (get().isOnline) {
                 const response = await fetch(`https://randomuser.me/api/?page=${page}&results=${get().pageSize}`);
                 const data = await response.json();
@@ -46,12 +62,7 @@ export const useUserStore = create<UserState>((set, get) => ({
                 await db.users.bulkPut(users);
                 set({ users, page, totalUsers: 100 }); // Assuming 100 total users for pagination
             } else {
-                // Fallback to IndexedDB cache
-                const users = await db.users
-                    .offset((page - 1) * get().pageSize)
-                    .limit(get().pageSize)
-                    .toArray();
-                set({ users, page });
+                throw new Error('Offline and no cached data available');
             }
         } catch (err) {
             set({ error: err instanceof Error ? err.message : 'Failed to fetch users' });
