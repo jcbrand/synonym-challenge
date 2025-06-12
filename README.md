@@ -1,18 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Local-First User Directory
+
+A Next.js application with offline-first capabilities using Zustand for state management and Dexie.js for IndexedDB caching.
+
+## Features
+
+- Fetches user data from randomuser.me API
+- Caches data locally using IndexedDB
+- Works offline with cached data
+- Mark users as favorites
+- Responsive UI with Tailwind CSS
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+
+## Testing Offline Mode
+
+1. Use Chrome DevTools to simulate offline mode
+2. Or use the "Go Offline" toggle in the app (coming soon)
+
+## Technologies Used
+
+- Next.js 14
+- Zustand (state management)
+- Dexie.js (IndexedDB)
+- Tailwind CSS (styling)
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
