@@ -13,6 +13,7 @@ export interface User {
         large: string;
         medium: string;
         thumbnail: string;
+        largeData?: string;
     };
     nat: string;
     isFavorite?: boolean;

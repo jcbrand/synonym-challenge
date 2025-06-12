@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { User, db } from '../lib/db';
+import { fetchImageAsBase64 } from '@/utils';
 
 interface UserState {
     users: User[];
@@ -46,11 +47,19 @@ export const useUserStore = create<UserState>((set, get) => ({
             if (get().isOnline) {
                 const response = await fetch(`https://randomuser.me/api/?page=${page}&results=${get().pageSize}`);
                 const data = await response.json();
-                const users = data.results.map((user: any) => ({
-                    ...user,
-                    uuid: user.login.uuid,
-                    isFavorite: false,
-                }));
+                const users = await Promise.all(
+                    data.results.map(async (user: any) => {
+                        return {
+                            ...user,
+                            uuid: user.login.uuid,
+                            isFavorite: false,
+                            picture: {
+                                ...user.picture,
+                                largeData: await fetchImageAsBase64(user.picture.large),
+                            },
+                        };
+                    })
+                );
                 await db.users.bulkPut(users);
                 set({ users, page });
             } else {
