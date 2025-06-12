@@ -51,7 +51,19 @@ export function UserList() {
 
     return (
         <div className="space-y-4">
-            {!isOnline && <OfflineBanner />}
+            <div className="flex justify-between items-center mb-4 gap-2">
+                {!isOnline && <OfflineBanner />}
+                <button
+                    onClick={() => useUserStore.getState().toggleManualOffline()}
+                    className={`px-4 py-2 rounded ${
+                        useUserStore.getState().isManualOffline 
+                            ? 'bg-green-500 hover:bg-green-600' 
+                            : 'bg-yellow-500 hover:bg-yellow-600'
+                    } text-white`}
+                >
+                    {useUserStore.getState().isManualOffline ? 'Go Online' : 'Go Offline'}
+                </button>
+            </div>
 
             <div className="mb-4 flex gap-2">
                 <input
@@ -76,16 +88,6 @@ export function UserList() {
 
             {!searchQuery && (
                 <div className="flex justify-between items-center mt-6 gap-2">
-                    <button
-                        onClick={() => useUserStore.getState().toggleManualOffline()}
-                        className={`px-4 py-2 rounded ${
-                            useUserStore.getState().isManualOffline 
-                                ? 'bg-green-500 hover:bg-green-600' 
-                                : 'bg-yellow-500 hover:bg-yellow-600'
-                        } text-white`}
-                    >
-                        {useUserStore.getState().isManualOffline ? 'Go Online' : 'Go Offline'}
-                    </button>
                     <button
                         onClick={() => fetchUsers(page - 1)}
                         disabled={page === 1 || loading}
