@@ -85,7 +85,7 @@ export function UserList() {
                         Previous
                     </button>
                     <span className="text-gray-600 dark:text-gray-300">
-                        Page {page} of {Math.ceil(totalUsers / pageSize)}
+                        Page {page}
                     </span>
                     <button
                         onClick={() => fetchUsers(page + 1)}
