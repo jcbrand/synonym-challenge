@@ -66,23 +66,23 @@ export function UserCard({ user }: UserCardProps) {
                 />
             </div>
             <div className="p-3">
-                <div className="flex justify-between items-start">
-                    <div>
+                <div>
+                    <div className="flex justify-between items-start">
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                             {user.name.title} {user.name.first} {user.name.last}
                         </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{user.email}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                            {user.nat} • {user.gender}
-                        </p>
+                        <button
+                            onClick={() => toggleFavorite(user.uuid)}
+                            className="text-2xl focus:outline-none"
+                            aria-label={user.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+                        >
+                            {user.isFavorite ? '★' : '☆'}
+                        </button>
                     </div>
-                    <button
-                        onClick={() => toggleFavorite(user.uuid)}
-                        className="text-2xl focus:outline-none"
-                        aria-label={user.isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-                    >
-                        {user.isFavorite ? '★' : '☆'}
-                    </button>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{user.email}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                        {user.nat} • {user.gender}
+                    </p>
                 </div>
             </div>
         </div>

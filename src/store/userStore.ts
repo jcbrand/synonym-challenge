@@ -27,7 +27,7 @@ export const useUserStore = create<UserState>((set, get) => ({
     isOnline: true,
     isManualOffline: false,
     page: 1,
-    pageSize: 10,
+    pageSize: 12,
     searchQuery: '',
 
     fetchUsers: async (page = 1) => {
