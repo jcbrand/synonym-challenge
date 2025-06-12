@@ -7,10 +7,12 @@ interface UserState {
     loading: boolean;
     error: string | null;
     isOnline: boolean;
+    isManualOffline: boolean;
     page: number;
     pageSize: number;
     searchQuery: string;
     fetchUsers: (page?: number) => Promise<void>;
+    toggleManualOffline: () => void;
     toggleFavorite: (uuid: string) => void;
     setOnlineStatus: (status: boolean) => void;
     setSearchQuery: (query: string) => void;
@@ -23,6 +25,7 @@ export const useUserStore = create<UserState>((set, get) => ({
     loading: false,
     error: null,
     isOnline: true,
+    isManualOffline: false,
     page: 1,
     pageSize: 10,
     searchQuery: '',
@@ -93,6 +96,7 @@ export const useUserStore = create<UserState>((set, get) => ({
     },
 
     setOnlineStatus: (status: boolean) => set({ isOnline: status }),
+    toggleManualOffline: () => set((state) => ({ isManualOffline: !state.isManualOffline })),
     setSearchQuery: (query: string) => {
         set((state) => {
             const filtered = query

@@ -75,7 +75,17 @@ export function UserList() {
             </div>
 
             {!searchQuery && (
-                <div className="flex justify-between items-center mt-6">
+                <div className="flex justify-between items-center mt-6 gap-2">
+                    <button
+                        onClick={() => useUserStore.getState().toggleManualOffline()}
+                        className={`px-4 py-2 rounded ${
+                            useUserStore.getState().isManualOffline 
+                                ? 'bg-green-500 hover:bg-green-600' 
+                                : 'bg-yellow-500 hover:bg-yellow-600'
+                        } text-white`}
+                    >
+                        {useUserStore.getState().isManualOffline ? 'Go Online' : 'Go Offline'}
+                    </button>
                     <button
                         onClick={() => fetchUsers(page - 1)}
                         disabled={page === 1 || loading}
