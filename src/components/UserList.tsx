@@ -51,7 +51,7 @@ export function UserList() {
 
     return (
         <div className="space-y-4 max-w-4xl mx-auto px-4">
-            <div className="flex justify-between items-center mb-4 gap-2">
+            <div className="flex justify-between items-center mb-4 gap-2 max-w-4xl mx-auto px-4">
                 {!isOnline && <OfflineBanner />}
                 {isOnline && (
                     <button
