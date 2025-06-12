@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { User, db } from '../lib/db';
-import { fetchImageAsBase64 } from '@/utils';
 
 interface UserState {
     users: User[];
