@@ -12,12 +12,12 @@
 - [x] Implement offline detection in store
 - [x] Add error handling states
 
--[ ] 3. **UI Components**
-- [ ] Create `src/components/UserCard.tsx`
-- [ ] Create `UserList` component with pagination
-- [ ] Create `OfflineBanner` component
-- [ ] Create `LoadingSkeleton` component
-- [ ] Create `ErrorFallback` component
+-[x] 3. **UI Components**
+- [x] Create `src/components/UserCard.tsx`
+- [x] Create `UserList` component with pagination
+- [x] Create `OfflineBanner` component
+- [x] Create `LoadingSkeleton` component
+- [x] Create `ErrorFallback` component
 
 -[ ] 4. **Main Page**
 - [ ] Implement `app/page.tsx` with:
