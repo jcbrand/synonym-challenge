@@ -17,6 +17,5 @@ export default defineConfig({
         '**/vite-env.d.ts',
       ],
     },
-    setupFiles: ['./src/test/setup.ts'],
   },
 });
