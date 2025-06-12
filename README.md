@@ -24,35 +24,58 @@ npm install
 npm run dev
 ```
 
+3. Visit http://localhost:3000
+
+
+## Testing
+
+The project uses Vitest with Testing Library for component tests.
+
+### Running Tests
+```bash
+# Run tests once
+npm test
+
+# Run in watch mode
+npm run test:watch
+
+# Run with coverage report
+npm run test:coverage
+
+# Open test UI
+npm run test:ui
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+Example test commands:
+```bash
+# Run specific test file
+npm test src/components/__tests__/OfflineBanner.test.tsx
+
+# Update snapshots
+npm test -- -u
+```
+
 ## Testing Offline Mode
 
 1. Use Chrome DevTools to simulate offline mode
 2. Or use the "Go Offline" toggle in the app (coming soon)
 
-## Technologies Used
 
-- Next.js 14
-- Zustand (state management)
-- Dexie.js (IndexedDB)
-- Tailwind CSS (styling)
+## What I would have done next
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+There are many things I would have done next if I had the time.
+For one, I would have liked to add more comprehensive tests and get high test coverage.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I would also have liked to do more manual testing of the app to look for
+issues.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+There are linting errors which I would have liked to fix.
 
-## Learn More
+I would also have liked to go over the code and do some more quality control
+and checking that everything looks OK.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

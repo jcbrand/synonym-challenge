@@ -28,8 +28,8 @@
 
 ##Nice-to-Have Features
 -[ ] 5. **Enhanced Features**
-- [ ] Add manual "Go Offline" toggle
-- [ ] Implement search/filter functionality
+- [x] Add manual "Go Offline" toggle
+- [x] Implement search/filter functionality
 - [ ] Add sorting controls
 - [ ] Implement dark mode support
 
