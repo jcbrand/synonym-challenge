@@ -1,9 +1,9 @@
 #Local-First User Directory Implementation Plan
 
 ##Core Functionality
--[ ] 1. **Database Setup**
-- [ ] Create `src/lib/db.ts` with Dexie schema
-- [ ] Add database versioning support
+-[x] 1. **Database Setup**
+- [x] Create `src/lib/db.ts` with Dexie schema
+- [x] Add database versioning support
 - [ ] Implement data migration logic
 
 -[ ] 2. **State Management**
