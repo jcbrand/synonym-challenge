@@ -19,12 +19,12 @@
 - [x] Create `LoadingSkeleton` component
 - [x] Create `ErrorFallback` component
 
--[ ] 4. **Main Page**
-- [ ] Implement `app/page.tsx` with:
-- [ ] User list display
-- [ ] Pagination controls
-- [ ] Offline/error states
-- [ ] Loading states
+-[x] 4. **Main Page**
+- [x] Implement `app/page.tsx` with:
+- [x] User list display
+- [x] Pagination controls
+- [x] Offline/error states
+- [x] Loading states
 
 ##Nice-to-Have Features
 -[ ] 5. **Enhanced Features**
