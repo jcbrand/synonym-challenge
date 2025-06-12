@@ -71,7 +71,7 @@ export function UserCard({ user }: UserCardProps) {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                             {user.name.title} {user.name.first} {user.name.last}
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-300">{user.email}</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">{user.email}</p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
                             {user.nat} • {user.gender}
                         </p>
